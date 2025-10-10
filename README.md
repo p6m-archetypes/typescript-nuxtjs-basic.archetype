@@ -130,6 +130,51 @@ This archetype is ideal for:
 4. **Dashboard Applications**: Internal tools with Vue's progressive framework
 5. **Universal Applications**: Apps requiring both SSR and client-side interactivity
 
+## 🔌 Backend Integration Patterns
+
+This frontend application typically consumes:
+
+1. **GraphQL Gateways**: Primary recommended pattern
+   - Unified GraphQL API aggregating multiple backend services
+   - Client-driven queries reduce over-fetching
+   - Single endpoint simplifies frontend architecture
+   - Real-time updates via GraphQL subscriptions
+
+2. **REST APIs**: Traditional HTTP/JSON services
+   - Public REST APIs with OpenAPI documentation
+   - Direct service-to-frontend communication
+   - Standard HTTP verbs (GET, POST, PUT, DELETE)
+   - Works well for simple CRUD operations
+
+3. **Backend-for-Frontend (BFF)**: Dedicated backend for this frontend
+   - Custom API tailored to this application's needs
+   - Can be GraphQL or REST
+   - Aggregates multiple services on the backend
+   - Optimizes payload size and query patterns
+
+**Architecture Examples**:
+
+**Option 1: GraphQL Gateway (Recommended)**
+```
+Nuxt.js App → GraphQL Gateway → gRPC/REST Services
+```
+
+**Option 2: Direct REST API**
+```
+Nuxt.js App → REST Services → Database
+```
+
+**Option 3: BFF Pattern**
+```
+Nuxt.js App → Dedicated BFF (GraphQL/REST) → Multiple Services
+```
+
+**SSR Considerations**:
+- Server-side rendering can directly call backend services
+- Server API routes in `server/` directory can act as a lightweight BFF layer
+- Reduces client-side API calls and improves performance
+- Can aggregate data from multiple services during SSR
+
 ## 📚 What's Inside
 
 ### Core Configuration
